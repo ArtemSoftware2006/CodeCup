@@ -26,7 +26,7 @@
         hubConnection.on("CreateGroup", function(groupName) {
  
             let messageElement = document.createElement("p");
-            messageElement.textContent = groupName ;
+            messageElement.textContent ="http://localhost:5010/Group/CreateLinkGroup/" + groupName ;
             document.getElementById("chatroom").appendChild(messageElement);
         });
 

@@ -1,4 +1,6 @@
+using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Mvc;
+using Новая_папка.Models;
 
 namespace Новая_папка.Controllers
 {
@@ -15,6 +17,12 @@ namespace Новая_папка.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+        [Route("{group}")]
+        public IActionResult CreateLinkGroup(Guid group)
+        {
+            _logger.LogInformation(group.ToString());
+            return View("CreateLinkGroup", new GroupModel() {Id = group});
         }
         public IActionResult CreateGroup() 
         {

@@ -4,11 +4,12 @@ namespace CodeCup.Hubs
 {
     public class UserHub: Hub
     {
-        public async Task SendMessage(string user, string message)
+        public async Task SendMessage(string user, string message, string group)
         {
-            await Clients.All.SendAsync("ReceiveMessage", user, message);
+            await Clients.Group(group).SendAsync("ReceiveMessage", user, message);
             Console.WriteLine(user);
             Console.WriteLine(message);
+            Console.WriteLine(group);
         }
         public async Task CreateGroup()
         {
@@ -20,12 +21,11 @@ namespace CodeCup.Hubs
         {
             await this.Clients.All.SendAsync("Receive", message);
         }
-        public async Task JoinGroupFromLink(string username, string group)
+        public async Task JoinGroupFromLink(string group)
         {
             Console.WriteLine(group);
             await Groups.AddToGroupAsync(Context.ConnectionId, group);
-            Console.WriteLine(username);
-            await Clients.Group(group).SendAsync("UserAdded", username);
+            await Clients.Group(group).SendAsync("UserAdded", Context.ConnectionId);
         }
     }
 }
