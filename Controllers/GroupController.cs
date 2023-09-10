@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Новая_папка.Controllers
 {
-    [Route("[controller]")]
+    [Route("[controller]/[action]")]
     public class GroupController : Controller
     {
         private readonly ILogger<GroupController> _logger;
@@ -14,6 +14,11 @@ namespace Новая_папка.Controllers
 
         public IActionResult Index()
         {
+            return View();
+        }
+        public IActionResult CreateGroup() 
+        {
+            _logger.LogInformation("Add group");
             return View();
         }
 

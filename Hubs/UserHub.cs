@@ -10,20 +10,22 @@ namespace CodeCup.Hubs
             Console.WriteLine(user);
             Console.WriteLine(message);
         }
-        public async Task AddToGroup(string groupName, string username)
+        public async Task CreateGroup()
         {
+            string groupName = Guid.NewGuid().ToString();
             await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
-            Console.WriteLine(username);
-            await Clients.Group(groupName).SendAsync("UserAdded", username);
+            await Clients.Group(groupName).SendAsync("CreateGroup", groupName);
         }
         public async Task Send(string message)
         {
             await this.Clients.All.SendAsync("Receive", message);
         }
-        public async Task JoinGroupFromLink(string group)
+        public async Task JoinGroupFromLink(string username, string group)
         {
+            Console.WriteLine(group);
             await Groups.AddToGroupAsync(Context.ConnectionId, group);
-            await Clients.Group(group).SendAsync("UserAdded", Context.User.Identity.Name);
+            Console.WriteLine(username);
+            await Clients.Group(group).SendAsync("UserAdded", username);
         }
     }
 }

@@ -23,6 +23,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
 app.MapHub<UserHub>("/user");
 
 app.MapControllerRoute(
