@@ -1,11 +1,16 @@
 using CodeCup.Hubs;
+using Microsoft.EntityFrameworkCore;
+using Новая_папка;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<AppDbContext>(option => option.UseSqlite("Data Source=codeCupDb.db"));
+
 builder.Services.AddSignalR();
 
 var app = builder.Build();
+
 
 if (!app.Environment.IsDevelopment())
 {

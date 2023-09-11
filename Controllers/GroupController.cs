@@ -3,15 +3,17 @@ using Microsoft.AspNetCore.Mvc;
 using Новая_папка.Models;
 
 namespace Новая_папка.Controllers
-{
+{    
     [Route("[controller]/[action]")]
     public class GroupController : Controller
     {
         private readonly ILogger<GroupController> _logger;
+        private readonly AppDbContext _dbContext ;
 
-        public GroupController(ILogger<GroupController> logger)
+        public GroupController(ILogger<GroupController> logger, AppDbContext dbContext)
         {
             _logger = logger;
+            _dbContext = dbContext;
         }
 
         public IActionResult Index()
